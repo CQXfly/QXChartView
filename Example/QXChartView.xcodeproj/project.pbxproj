@@ -28,10 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1757FF2511F4738C9C9A1F9C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		1757FF2511F4738C9C9A1F9C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		35A5E54188463DAC9A17B369 /* Pods-QXChartView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QXChartView_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QXChartView_Example/Pods-QXChartView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		4803A4D9B00B98B9360D8BA3 /* Pods_QXChartView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QXChartView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E38BBF78CEF6B388519E81C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		5E38BBF78CEF6B388519E81C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* QXChartView_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QXChartView_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +46,7 @@
 		7A1C43FEBFAC6379017527E2 /* Pods-QXChartView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QXChartView_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-QXChartView_Example/Pods-QXChartView_Example.release.xcconfig"; sourceTree = "<group>"; };
 		8447AFAEDC704CCD2CD8CDCE /* Pods-QXChartView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QXChartView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QXChartView_Tests/Pods-QXChartView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A372BBDF8EFDDE8998FC29EB /* Pods-QXChartView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QXChartView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QXChartView_Tests/Pods-QXChartView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		B7D89504D509153BD2EEB369 /* QXChartView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = QXChartView.podspec; path = ../QXChartView.podspec; sourceTree = "<group>"; };
+		B7D89504D509153BD2EEB369 /* QXChartView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = QXChartView.podspec; path = ../QXChartView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

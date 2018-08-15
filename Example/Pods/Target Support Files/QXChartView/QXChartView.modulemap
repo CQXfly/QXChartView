@@ -1,0 +1,6 @@
+framework module QXChartView {
+  umbrella header "QXChartView-umbrella.h"
+
+  export *
+  module * { export * }
+}

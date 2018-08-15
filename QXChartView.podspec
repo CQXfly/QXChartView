@@ -21,16 +21,19 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/905799827@qq.com/QXChartView'
+  s.homepage         = 'https://github.com/CQXfly/QXChartView'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { '905799827@qq.com' => 'qingxu.chong@yintech.cn' }
-  s.source           = { :git => 'https://github.com/905799827@qq.com/QXChartView.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/CQXfly/QXChartView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'QXChartView/Classes/**/*'
+  
+  s.static_framework = true
+  
   
   # s.resource_bundles = {
   #   'QXChartView' => ['QXChartView/Assets/*.png']
