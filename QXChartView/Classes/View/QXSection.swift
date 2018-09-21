@@ -41,4 +41,45 @@ open class QXSection {
     open var ratios: Int = 0
     //固定高度，为0则通过ratio计算高度
     open var fixHeight: CGFloat = 0
+    
+    open var frame: CGRect = CGRect.zero
+    /// Y轴参数
+    open var yAxis: QXYAxis = QXYAxis()
+    // X轴参数
+    open var xAxis: QXXAxis = QXXAxis()
+    
+    open var backgroundColor: UIColor = .black
+    
+    open var index: Int = 0
+    
+    var titleLayer: QXShapeLayer = QXShapeLayer()
+    
+    var sectionLayer: QXShapeLayer = QXShapeLayer()
+    
+    var titleView: UIView?
+    
+}
+
+extension QXSection {
+    public func getLocalY(_ val: CGFloat) -> CGFloat {
+        let max = self.yAxis.max
+        let min = self.yAxis.min
+        
+        if (max == min) {
+            return 0
+        }
+        
+        
+        /*
+         计算公式：
+         y轴有值的区间高度 = 整个分区高度-（paddingTop+paddingBottom）
+         当前y值所在位置的比例 =（当前值 - y最小值）/（y最大值 - y最小值）
+         当前y值的实际的相对y轴有值的区间的高度 = 当前y值所在位置的比例 * y轴有值的区间高度
+         当前y值的实际坐标 = 分区高度 + 分区y坐标 - paddingBottom - 当前y值的实际的相对y轴有值的区间的高度
+         */
+        
+        let baseY = self.frame.size.height + self.frame.origin.y - self.padding.bottom - (self.frame.size.height - self.padding.top - self.padding.bottom) * (val - min) / (max - min)
+        
+        return baseY
+    }
 }
