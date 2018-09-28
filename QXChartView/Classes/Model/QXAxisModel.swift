@@ -5,7 +5,7 @@
 //  Created by fox on 2018/8/15.
 //
 
-import Foundation
+import UIKit
 /**
  Y轴显示的位置
  

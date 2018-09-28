@@ -5,7 +5,7 @@
 //  Created by fox on 2018/8/15.
 //
 
-import Foundation
+import UIKit
 
 /**
  改数据的走势方向
@@ -23,7 +23,7 @@ public enum QXChartItemTrend {
 /**
  *  数据元素
  */
-public struct QXChartItem {
+public class QXChartItem: NSObject {
     
     public var time: Int = 0
     public var openPrice: CGFloat = 0
@@ -237,7 +237,7 @@ open class QXChartModel : QXChartModelProtocol {
 extension QXChartModel {
     public subscript(index:Int) -> QXChartItem {
         var value: CGFloat?
-        var item = self.datas[index]
+        let item = self.datas[index]
         value = item.extVal[self.key]
         item.value = value
         return item
@@ -317,9 +317,22 @@ open class QXLineModel: QXChartModel {
             let minLayer = self.drawGuideValue(value: lowPrice, section: section, point: minPoint!, trend: .down)
             serieLayer.addSublayer(minLayer)
         }
+        
         return serieLayer
     }
 }
+
+
+open class QXCandleModel: QXChartModel {
+    var drawShadow = true
+    
+    open override func drawSerie(_ startIndex: Int, endIndex: Int) -> CAShapeLayer {
+        // TODO:
+        
+        return CAShapeLayer()
+    }
+}
+
 
 extension QXChartModel {
     class func getLine(_ color: UIColor, title: String, key: String) -> QXLineModel {
@@ -328,7 +341,22 @@ extension QXChartModel {
         model.key = key
         return model
     }
+    
+    
+    //生成一个蜡烛样式
+//    class func getCandle(upStyle: (color: UIColor, isSolid: Bool),
+//                         downStyle: (color: UIColor, isSolid: Bool),
+//                         titleColor: UIColor,
+//                         key: String = QXSeriesKey.candle) -> QXCandleModel {
+//        let model = QXCandleModel(upStyle: upStyle, downStyle: downStyle,
+//                                  titleColor: titleColor)
+//        model.key = key
+//        return model
+//    }
 }
+
+
+
 
 let m = QXChartModel()
 

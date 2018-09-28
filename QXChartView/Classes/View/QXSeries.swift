@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public struct QXSeriesKey {
     public static let candle = "Candle"
@@ -53,6 +54,27 @@ extension QXSeries {
         timeline.showMinVal = showGuide
         timeline.lineWidth = lineWidth
         series.chartModels = [timeline]
+        return series
+    }
+    
+    /**
+     返回一个标准的蜡烛柱价格系列样式
+     */
+    public class func getCandlePrice(upStyle: (color: UIColor, isSolid: Bool),
+                                     downStyle: (color: UIColor, isSolid: Bool),
+                                     titleColor: UIColor,
+                                     section: QXSection,
+                                     showGuide: Bool = false,
+                                     ultimateValueStyle: QXUltimateValueStyle = .none) -> QXSeries {
+        let series = QXSeries()
+//        series.key = QXSeriesKey.candle
+//        let candle = QXChartModel.getCandle(upStyle: upStyle, downStyle: downStyle, titleColor: titleColor)
+//        candle.section = section
+//        candle.useTitleColor = false
+//        candle.showMaxVal = showGuide
+//        candle.showMinVal = showGuide
+//        candle.ultimateValueStyle = ultimateValueStyle
+//        series.chartModels = [candle]
         return series
     }
 }
