@@ -592,6 +592,128 @@ extension QXKLineChartView {
         }
     }
     
+    fileprivate func drawSection(_ section: QXSection) {
+        
+        // 背景
+        let sectionPath = UIBezierPath(rect: section.frame)
+        let sectionLayer = QXShapeLayer()
+        sectionLayer.fillColor = section.backgroundColor.cgColor
+        sectionLayer.path = sectionPath.cgPath
+        self.drawLayer.addSublayer(sectionLayer)
+        
+        let borderPath = UIBezierPath()
+        
+        // 底部边线
+        if borderWidth.bottom > 0 {
+            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.size.height + section.frame.origin.y, width: section.frame.size.width - section.padding.left, height: borderWidth.bottom)))
+        }
+        
+        
+        if borderWidth.top > 0 {
+            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.origin.y, width: section.frame.size.width - section.padding.left, height: borderWidth.top)))
+        }
+        
+        if borderWidth.left > 0 {
+            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.padding.left, y: section.frame.origin.y, width: borderWidth.left, height: section.frame.size.height)))
+        }
+        
+        if self.borderWidth.right > 0 {
+            
+            borderPath.append(UIBezierPath(rect: CGRect(x: section.frame.origin.x + section.frame.size.width - section.padding.right, y: section.frame.origin.y, width: self.borderWidth.left, height: section.frame.size.height)))
+            
+        }
+        
+        let borderLayer = QXShapeLayer()
+        borderLayer.lineWidth = self.lineWidth
+        borderLayer.path = borderPath.cgPath  // 从贝塞尔曲线获取到形状
+        borderLayer.fillColor = self.lineColor.cgColor // 闭环填充的颜色
+        self.drawLayer.addSublayer(borderLayer)
+    }
+    
+    fileprivate func drawYAxis(_ section: QXSection) -> [(CGRect, String)] {
+        var yAxisToDraw = [(CGRect, String)]()
+        var valueToDraw = Set<CGFloat>()
+        
+        var startX: CGFloat = 0, startY: CGFloat = 0, extrude: CGFloat = 0
+        var showYAxisLabel: Bool = true;
+        var showYAxisReference: Bool = true
+        
+        switch self.showYAxisLabel {
+        case .left:
+            startX = section.frame.origin.x - 3 * (self.isInnerYAxis ? -1 : 1)
+            extrude = section.frame.origin.x + section.padding.left + 2
+        case .right:
+            startX = section.frame.maxX - self.yAxisLabelWidth + 3 * (self.isInnerYAxis ? -1 : 1)
+            extrude = section.frame.origin.x + section.padding.left + section.frame.size.width - section.padding.right
+
+        case .none:
+            showYAxisLabel = false
+        }
+        
+        let yaxis = section.yAxis
+        
+        let step = (yaxis.max - yaxis.min) / CGFloat(yaxis.tickInterval)
+        
+        var i = 0
+        var yval = yaxis.baseValue - CGFloat(i) * step
+        
+        while yval <= yaxis.max && i <= yaxis.tickInterval {
+            valueToDraw.insert(yval)
+            
+            i = i + 1
+            yval = yaxis.baseValue - CGFloat(i) * step
+        }
+        
+        for (i , yval) in valueToDraw.enumerated() {
+            let iy = section.getLocalY(yval)
+            
+            if self.isInnerYAxis {
+                startY = iy - 14
+            } else {
+                startY = iy - 7
+            }
+            
+            let referencePath = UIBezierPath()
+            let referenceLayer = QXShapeLayer()
+            
+            referenceLayer.lineWidth = self.lineWidth
+            
+            switch section.yAxis.assistLineStyle {
+            case .dash(color: let dashColor, pattern: let pattern):
+                referenceLayer.strokeColor = dashColor.cgColor
+                referenceLayer.lineDashPattern = pattern
+                showYAxisReference = true
+            case .solid(color: let solidColor):
+                referenceLayer.strokeColor = solidColor.cgColor
+                showYAxisReference = true
+            default:
+                showYAxisReference = false
+                startY = iy - 7
+            }
+            
+            if showYAxisReference {
+                if !self.isInnerYAxis {
+                    referencePath.move(to: CGPoint(x: extrude, y: iy))
+                    referencePath.addLine(to: CGPoint(x: extrude + 2, y: iy))
+                }
+                
+                referencePath.move(to: CGPoint(x: section.frame.origin.x + section.padding.left, y: iy))
+                referencePath.addLine(to: CGPoint(x: section.frame.origin.x + section.frame.size.width - section.padding.right, y: iy))
+                referenceLayer.path = referencePath.cgPath
+                drawLayer.addSublayer(referenceLayer)
+                
+            }
+            
+            if showYAxisLabel {
+                let strValue = self.delegate?.kLineChart(self, labelOnYAxisForValue: yval, atIndex: i, section: section) ?? ""
+                let yLabelRect = CGRect(x: startX, y: startY, width: yAxisLabelWidth, height: 12)
+                
+                yAxisToDraw.append((yLabelRect, strValue))
+            }
+        }
+        
+        return yAxisToDraw
+    }
     
     ///初始化各个分区
     ///

@@ -41,6 +41,9 @@ public struct QXYAxis {
     
     /// 固定的基值
     public var baseValue: CGFloat = 0
+
+    /// 间断显示个数
+    public var tickInterval: Int = 4
     
     public var pos: Int = 0
     /// 约束小数位
